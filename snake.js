@@ -47,47 +47,47 @@ function createBoard() {
 
 function createSnake() {
     // Initialize 3-unit snake at cell 120, 121, 122
-    $("#120").addClass("snake");
-    $("#121").addClass("snake");
-    $("#122").addClass("snakehead");
+    $("#6").addClass("snake");
+    $("#7").addClass("snake");
+    $("#8").addClass("snakehead");
 
     // Push snake segments to snake array
-    SNAKE.push("120");
-    SNAKE.push("121");
-    SNAKE.push("122");
+    SNAKE.push("6");
+    SNAKE.push("7");
+    SNAKE.push("8");
 }
 
 function generateFruit() {
     // Generate randomly placed fruit on board
     var fruitGenerated = false;
-    while (fruitGenerated == false) {
-        var fruitID = '#' + (Math.round(Math.random() * ((BOARDWIDTH / CELLSIZE) * (BOARDHEIGHT / CELLSIZE))));
-        if (!$(fruitID).attr("class").match(/snake|snakehead|border|badfruit/)) {
-            $(fruitID).addClass("fruit");
-            fruitGenerated = true;
-        } 
-    }
+    // while (fruitGenerated == false) {
+    //     var fruitID = '#' + (Math.round(Math.random() * ((BOARDWIDTH / CELLSIZE) * (BOARDHEIGHT / CELLSIZE))));
+    //     if (!$(fruitID).attr("class").match(/snake|snakehead|border|badfruit/)) {
+    //         $(fruitID).addClass("fruit");
+    //         fruitGenerated = true;
+    //     }
+    // }
     // Generate randomly placed bad fruit on board
     var badFruitGenerated = 0;
-    while (badFruitGenerated !== 5) {
-        var badFruitID = '#' + (Math.round(Math.random() * ((BOARDWIDTH / CELLSIZE) * (BOARDHEIGHT / CELLSIZE))));
-        if (!$(badFruitID).attr("class").match(/snake|snakehead|border|fruit/)) {
-            $(badFruitID).addClass("badfruit");
-            badFruitGenerated += 1;
-        } 
-    }
+    // while (badFruitGenerated !== 5) {
+    //     var badFruitID = '#' + (Math.round(Math.random() * ((BOARDWIDTH / CELLSIZE) * (BOARDHEIGHT / CELLSIZE))));
+    //     if (!$(badFruitID).attr("class").match(/snake|snakehead|border|fruit/)) {
+    //         $(badFruitID).addClass("badfruit");
+    //         badFruitGenerated += 1;
+    //     }
+    // }
 }
 
 function gamePlay() {
     var currentMove = "";
 
-    var intervalID = setInterval(function() {
+    var intervalID = setInterval(function () {
         if (currentMove != "") {
             move(currentMove);
         }
     }, SPEED);
 
-    $(document).keydown(function(event) {
+    $(document).keydown(function (event) {
         event.preventDefault();
         switch (event.which) {
             case 39:
@@ -104,12 +104,12 @@ function gamePlay() {
                 break;
         }
     });
-    
-    var move = function(dir) {
+
+    var move = function (dir) {
         var currentPosition = SNAKE[SNAKE.length - 1];
         var nextID = 0;
 
-        switch(dir) {
+        switch (dir) {
             case "right":
                 nextID = parseInt(currentPosition) + 1;
                 break;
@@ -147,7 +147,7 @@ function gamePlay() {
             currentMove = "";
             clearInterval(intervalID);
             $("#startslate").html("Collision! End Score: " + SCORE);
-            setTimeout(function() {
+            setTimeout(function () {
                 initGame();
             }, 2000);
             return;
@@ -158,7 +158,7 @@ function gamePlay() {
             currentMove = "";
             clearInterval(intervalID);
             $("#startslate").html("Collision! End Score: " + SCORE);
-            setTimeout(function() {
+            setTimeout(function () {
                 initGame();
             }, 2000);
             return;
@@ -169,7 +169,7 @@ function gamePlay() {
             currentMove = "";
             clearInterval(intervalID);
             $("#startslate").html("Collision! End Score: " + SCORE);
-            setTimeout(function() {
+            setTimeout(function () {
                 initGame();
             }, 2000);
             return;
@@ -211,7 +211,7 @@ function initGame() {
     gamePlay();
 }
 
-$(document).keypress(function(event) {
+$(document).keypress(function (event) {
     if (event.which === 13) {
         if ($("#startslate").html() == "PRESS ENTER TO START") {
             event.preventDefault();
@@ -220,6 +220,6 @@ $(document).keypress(function(event) {
     }
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     createBoard();
 });
